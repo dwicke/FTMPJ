@@ -1,0 +1,13 @@
+This is a port of Ibis/MPJ.  I fixed a bug with probing for and then recieving 
+an array of Objects. In Ibis's release this caused a null pointer to be returned.
+I found that in MPJObject that the method cast2ObjectArray only worked if the
+MPJObject.buffer was a byte[]. I checked if the MPJObject.buffer is a Object[]
+and then just copied the objects.
+
+I am also working on providing a means within FTMPJ to allow
+the MPI program to know when a connection is lost in order 
+to not send data to a specific process. This will allow the user to produce
+fault tolerant code.
+
+I intend to use FTMPJ in MALSIM to provide multi processing capabilities. 
+

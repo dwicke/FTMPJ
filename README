@@ -11,3 +11,8 @@ fault tolerant code.
 
 I intend to use FTMPJ in MALSIM to provide multi processing capabilities. 
 
+While working with iprobe I noticed that it was blocking. This was due to 
+the fact that when checking if it should continue to look for messages
+it checked the IPROBE opcode with the field opcode which was never set
+to an opcode.  Rather the field mode is used to store the opcode
+so I changed the check and it works.

@@ -657,7 +657,7 @@ public class IbisMPJComm extends Thread {
         synchronized (queue) {
             queue.lock();
             this.status = queue.probe(this.contextId, this.tag);
-            
+            System.err.println("DREW Stat is not null");
             // if queue has not the requested object, try to connect to the
             // receiveport
             if (this.status == null) {
@@ -667,8 +667,9 @@ public class IbisMPJComm extends Thread {
                 while (!msgFound) {
 
                     obj = new MPJObject();
+                    System.err.println("DREW Status was null going to poll for a message");
                     msg = con.pollForMessage();
-
+                    System.err.println("DREW finshed Polling");
                     if (msg != null) {
                         // get message header
                         con.receiveHeader(msg, obj.desc);
@@ -713,8 +714,15 @@ public class IbisMPJComm extends Thread {
                         }
                         msg = null;
                     }
-
-                    if (this.opCode == OP_IPROBE) {
+                    System.err.println("DREW OPCODE= " + this.opCode);
+                    // DREW this.opCode is never set to the opcode
+                    // and it also seems like opCode is actually mode
+                    // since if I iprobe it opcode is not OP_IPROBE but 0
+                    // so I changed it to this.mode which is init to 
+                    // the opcode
+                    //if (this.opCode == OP_IPROBE) {
+                    if (this.mode == OP_IPROBE) {
+                        System.err.println("DREW I AM A IPROBE");
                         msgFound = true;
                     }
                 }
@@ -723,7 +731,7 @@ public class IbisMPJComm extends Thread {
             queue.release();
 
         }
-
+        System.err.println("DREW EXITING probe");
     }
 
     private void doProbeAnySource() throws MPJException {

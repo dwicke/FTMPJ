@@ -293,14 +293,16 @@ public class MPJObject implements Serializable {
         
         if ((this.buffer == null) || (destBuf == null) || (count <= 0)
                 || (offset < 0) || (!(destBuf instanceof Object[]))) {
-            
+           /* 
             System.err.println("DREW(this.buffer == null) =" + (this.buffer == null));
             System.err.println("DREW(destBuf == null) = " + (destBuf == null));
             System.err.println("DREW (count <= 0) = " +  (count <= 0));
             System.err.println("DREW (offset < 0) = " + (offset < 0));
             System.err.println("DREW (!(destBuf instanceof Object[])) = " + (!(destBuf instanceof Object[])));
             System.err.println("DREW in MPJOBJECT (!(this.buffer instanceof byte[]))= " + (!(this.buffer instanceof byte[])));
-            return (0);
+          
+             */
+             return (0);
         }
         if (((this.buffer instanceof byte[])))
         {

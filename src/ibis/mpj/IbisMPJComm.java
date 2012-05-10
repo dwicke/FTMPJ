@@ -317,7 +317,7 @@ public class IbisMPJComm extends Thread {
 
                 obj = null;
                 obj = queue.getObject(contextId, tag);
-                System.err.println("DREW in IBISMPJCOMM The object in the queue is " + obj);
+               // System.err.println("DREW in IBISMPJCOMM The object in the queue is " + obj);
                 // found the object inside the queue
                 if ((obj != null)) {
                     if (logger.isDebugEnabled()) {
@@ -328,7 +328,7 @@ public class IbisMPJComm extends Thread {
                     typeSize = datatype.getByteSize();
                     // message was NOT buffered -> normal copy
                     if (!obj.isBuffered()) {
-                        System.err.append("DREW Object was not buffered\n");
+                 //       System.err.append("DREW Object was not buffered\n");
                         realCount = castBuffer(obj, buf, offset, count * extent);
                     }
 
@@ -353,7 +353,7 @@ public class IbisMPJComm extends Thread {
                                 * datatype.extent());
                     }
                     
-                    System.err.println("DREW IBISMPJComm The message was recv and it is " + ((Object[])obj.buffer)[0] + " " + ((Object[])buf).length);
+                //    System.err.println("DREW IBISMPJComm The message was recv and it is " + ((Object[])obj.buffer)[0] + " " + ((Object[])buf).length);
                     msgReceived = true;
 
                 }
@@ -552,11 +552,11 @@ public class IbisMPJComm extends Thread {
             con.putMPJObject(sendObj, buf, offset, count * datatype.extent());
             if (con.isConnectionEstablished() == false)
             {
-                System.err.append("DREW NO CONNECTION in IbisMPJComm");
+            //    System.err.append("DREW NO CONNECTION in IbisMPJComm");
             }
             else
             {
-                System.err.append("DREW CONNECTION in IbisMPJComm");
+           //     System.err.append("DREW CONNECTION in IbisMPJComm");
             }
             con.sendMPJObject();
 
@@ -657,7 +657,7 @@ public class IbisMPJComm extends Thread {
         synchronized (queue) {
             queue.lock();
             this.status = queue.probe(this.contextId, this.tag);
-            System.err.println("DREW Stat is not null");
+        //    System.err.println("DREW Stat is not null");
             // if queue has not the requested object, try to connect to the
             // receiveport
             if (this.status == null) {
@@ -667,9 +667,9 @@ public class IbisMPJComm extends Thread {
                 while (!msgFound) {
 
                     obj = new MPJObject();
-                    System.err.println("DREW Status was null going to poll for a message");
+            //        System.err.println("DREW Status was null going to poll for a message");
                     msg = con.pollForMessage();
-                    System.err.println("DREW finshed Polling");
+           //         System.err.println("DREW finshed Polling");
                     if (msg != null) {
                         // get message header
                         con.receiveHeader(msg, obj.desc);
@@ -689,14 +689,14 @@ public class IbisMPJComm extends Thread {
                         con.receiveData(msg, obj.buffer, 0, obj
                                 .getNumberOfElements());
 
-                        System.err.println("DREW in IBISMPJCOMM FOUND object " + ((Object[])obj.buffer)[0]);
+            //            System.err.println("DREW in IBISMPJCOMM FOUND object " + ((Object[])obj.buffer)[0]);
                         // Seems like the probe doesn't check if it is from the source
                         // well i guess they use this contextid instead...
                         
                         
                         queue.addObject(obj);
                         
-                        System.out.println("DREW Printing the status of the added object from probe " + queue.probe(contextId, tag));
+            //            System.out.println("DREW Printing the status of the added object from probe " + queue.probe(contextId, tag));
                         
 
                         // the message was expected
@@ -714,7 +714,7 @@ public class IbisMPJComm extends Thread {
                         }
                         msg = null;
                     }
-                    System.err.println("DREW OPCODE= " + this.opCode);
+            //        System.err.println("DREW OPCODE= " + this.opCode);
                     // DREW this.opCode is never set to the opcode
                     // and it also seems like opCode is actually mode
                     // since if I iprobe it opcode is not OP_IPROBE but 0
@@ -722,7 +722,7 @@ public class IbisMPJComm extends Thread {
                     // the opcode
                     //if (this.opCode == OP_IPROBE) {
                     if (this.mode == OP_IPROBE) {
-                        System.err.println("DREW I AM A IPROBE");
+            //            System.err.println("DREW I AM A IPROBE");
                         msgFound = true;
                     }
                 }
@@ -731,7 +731,7 @@ public class IbisMPJComm extends Thread {
             queue.release();
 
         }
-        System.err.println("DREW EXITING probe");
+     //   System.err.println("DREW EXITING probe");
     }
 
     private void doProbeAnySource() throws MPJException {

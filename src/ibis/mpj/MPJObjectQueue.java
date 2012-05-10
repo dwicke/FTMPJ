@@ -46,7 +46,7 @@ public class MPJObjectQueue {
         }
 
         if (obj != null) {
-            System.err.print("DREW IN MPJObjectQueue and removing obj " + obj);
+          //  System.err.print("DREW IN MPJObjectQueue and removing obj " + obj);
             queue.remove(i);
         }
 
@@ -69,7 +69,7 @@ public class MPJObjectQueue {
             }
             
         }
-        System.err.append("DREW MPJOBJECTQUEUE probe is " + obj);
+      //  System.err.append("DREW MPJOBJECTQUEUE probe is " + obj);
         if (obj != null) {
             status = new Status();
             if (obj.getObjectData() != null) {
